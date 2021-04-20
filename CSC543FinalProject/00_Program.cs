@@ -34,7 +34,8 @@ namespace CSC543FinalProject
         public static void Main(string[] args)
         {
             Console.WriteLine("CSC543 Final Project - Spring 2021 - Bob Elward");
-            Console.WriteLine(Environment.OSVersion.VersionString);
+            Console.WriteLine($"OS: {Environment.OSVersion.VersionString}");
+            Console.WriteLine($"Computer Name: {Environment.MachineName}");
 
             ParallelForSimple.Run();
             ParallelForEachWithThreadLocal.Run();

@@ -18,20 +18,20 @@ namespace CSC543FinalProject
      * <remarks>Written By: Bob Elward - April 2021</remarks>
      */
     [Immutable()]
-    /**
-     * <summary>Run method.  
-     *          Invokes the set of examples.
-     * </summary>
-     * <remarks>Written By: Bob Elward - April 2021</remarks>
-     */
     public class ParallelForEach_SimulatedWork
     {
+        /**
+         * <summary>Run method.  
+         *          Invokes the set of examples.
+         * </summary>
+         * <remarks>Written By: Bob Elward - April 2021</remarks>
+         */
         public static void Run()
         {
             Console.WriteLine("\n\nParallelForEach_SimulatedWork ============================== \n");
 
             Stopwatch stopwatch = new Stopwatch();
-            IEnumerable<int> range = Enumerable.Range(1, 1000);
+            IEnumerable<int> range = Enumerable.Range(0, 1000);
             Partitioner<int> partitioner = Partitioner.Create<int>(range);
 
             //******************************
@@ -42,7 +42,7 @@ namespace CSC543FinalProject
             stopwatch.Reset();
             stopwatch.Start();
 
-            foreach (var x in range)
+            foreach (int i in range)
             {
                 Thread.Sleep(1);
             }
