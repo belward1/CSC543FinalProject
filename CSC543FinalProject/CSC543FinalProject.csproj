@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="CSC 543 - Spring 2021 - Final Project - Bob Elward.pptx" />
+    <None Remove="world192.txt" />
+  </ItemGroup>
+
+</Project>
