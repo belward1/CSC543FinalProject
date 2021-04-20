@@ -36,12 +36,12 @@ namespace CSC543FinalProject
             Console.WriteLine("CSC543 Final Project - Spring 2021 - Bob Elward");
             Console.WriteLine(Environment.OSVersion.VersionString);
 
-            //ParallelForSimple.Run();
-            //ParallelForEachWithThreadLocal.Run();
-            //ParallelForDotProduct.Run();
+            ParallelForSimple.Run();
+            ParallelForEachWithThreadLocal.Run();
+            ParallelForDotProduct.Run();
+            ParallelForEach_SimulatedWork.Run();
             //ParallelMapReduce.Run();
             //ParallelMapReduce_MemoryT.Run();
-            ParallelForEach_SimulatedWork.Run();
 
             return;
         }
