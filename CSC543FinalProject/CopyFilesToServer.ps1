@@ -21,10 +21,11 @@ $port = "-P 22"
 #
 $projectdir = "CSC543FinalProject/"
 
+#==================================
 #
 # C# source code
 #
-$subdir = $projectdir
+$subdir = "./"
 $files = $subdir + "*.cs"
 $to = "relwa136@kuvapcsitrd01.kutztown.edu:/home/students.kutztown.edu/relwa136/csc543/csharp/" + $projectdir
 #
@@ -42,10 +43,11 @@ Start-Process -NoNewWindow `
               -FilePath $command `
               -ArgumentList $arguments
 			  
+#==================================
 #
 # text file
 #
-$subdir = $projectdir
+$subdir = "./"
 $files = $subdir + "*.txt"
 $to = "relwa136@kuvapcsitrd01.kutztown.edu:/home/students.kutztown.edu/relwa136/csc543/csharp/" + $projectdir
 #
@@ -63,10 +65,11 @@ Start-Process -NoNewWindow `
               -FilePath $command `
               -ArgumentList $arguments
 			  
+#==================================
 #
 # C# project file
 #
-$subdir = $projectdir
+$subdir = "./"
 $files = $subdir + "*.csproj"
 $to = "relwa136@kuvapcsitrd01.kutztown.edu:/home/students.kutztown.edu/relwa136/csc543/csharp/" + $projectdir
 #
@@ -84,10 +87,33 @@ Start-Process -NoNewWindow `
               -FilePath $command `
               -ArgumentList $arguments
 			  
+#==================================
+#
+# Visio file
+#
+$subdir = "./"
+$files = $subdir + "*.vsdx"
+$to = "relwa136@kuvapcsitrd01.kutztown.edu:/home/students.kutztown.edu/relwa136/csc543/csharp/" + $projectdir
+#
+"Project Directory: " + $projectdir
+#
+# Command arguments
+#
+$arguments = $identity + " " + $port +" " + $files + " " + $to
+"arguments: " + $arguments
+#
+# Run command
+#
+Start-Process -NoNewWindow `
+              -Wait `
+              -FilePath $command `
+              -ArgumentList $arguments
+			  
+#==================================
 #
 # PowerPoint file
 #
-$subdir = $projectdir
+$subdir = "./"
 $files = $subdir + "*.pptx"
 $to = "relwa136@kuvapcsitrd01.kutztown.edu:/home/students.kutztown.edu/relwa136/csc543/csharp/" + $projectdir
 #
@@ -105,6 +131,7 @@ Start-Process -NoNewWindow `
               -FilePath $command `
               -ArgumentList $arguments
 			  
+#==================================
 #
 # POWERSHELL scripts
 #
@@ -125,3 +152,5 @@ Start-Process -NoNewWindow `
               -Wait `
               -FilePath $command `
               -ArgumentList $arguments
+
+#==================================

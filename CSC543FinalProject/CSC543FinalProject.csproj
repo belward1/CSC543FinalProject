@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="CopyFilesToServer.ps1" />
     <None Remove="CSC 543 - Spring 2021 - Final Project - Bob Elward.pptx" />
+    <None Remove="CSC543FinalProject_MapReduce.vsdx" />
     <None Remove="world192.txt" />
   </ItemGroup>
 
