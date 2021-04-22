@@ -37,11 +37,11 @@ namespace CSC543FinalProject
             Console.WriteLine($"OS: {Environment.OSVersion.VersionString}");
             Console.WriteLine($"Computer Name: {Environment.MachineName}");
 
-            ParallelForSimple.Run();
-            ParallelForEachWithThreadLocal.Run();
-            ParallelForDotProduct.Run();
-            ParallelForEach_SimulatedWork.Run();
-            //ParallelMapReduce.Run();
+            //ParallelForSimple.Run();
+            //ParallelForEachWithThreadLocal.Run();
+            //ParallelForDotProduct.Run();
+            //ParallelForEach_SimulatedWork.Run();
+            ParallelMapReduce.Run();
             //ParallelMapReduce_MemoryT.Run();
 
             return;

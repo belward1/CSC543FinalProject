@@ -30,7 +30,7 @@ namespace CSC543FinalProject
             for (int i = 0; i < loopMax; i++)
             {
                 Console.WriteLine($"i = {i} on thread: {Thread.CurrentThread.ManagedThreadId}");
-                Thread.Sleep(10);
+                Thread.Sleep(1000);
             }
 
             try
