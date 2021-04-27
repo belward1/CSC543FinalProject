@@ -40,12 +40,12 @@ namespace CSC543FinalProject
             ParallelInvoke.Run();
             ParallelForSimple.Run();
             ParallelForEachWithThreadLocal.Run();
-            ParallelForEach_SimulatedWork.Run();
+            ////ParallelForEach_SimulatedWork.Run();
             ParallelForDotProduct.Run();
             ParallelForMatrixMultiply.Run();
             ParallelForPiCalculation.Run();
             ParallelMapReduce.Run();
-            ParallelMapReduce_MemoryT.Run();
+            ////ParallelMapReduce_MemoryT.Run();
 
             return;
         }
