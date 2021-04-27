@@ -21,7 +21,9 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallellForSimple =============================================== \n");
+            Console.WriteLine("\n\n" + ("ParallellFor - Simple" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
+
             int loopMax = 10;
 
             //******************************
@@ -86,6 +88,8 @@ namespace CSC543FinalProject
             catch (AggregateException aggEx)
             {
                 Console.WriteLine($"ERROR-AggregateException: {aggEx.Message}");
+
+                //Program.HaltIfDebug();
             }
 
             //******************************
@@ -104,7 +108,12 @@ namespace CSC543FinalProject
             Console.WriteLine($"i = {i} on thread: {Thread.CurrentThread.ManagedThreadId}");
             Thread.Sleep(1000);
 
-            if (i > 7) throw new Exception($"Exception in DoWork - i = {i}");
+            if (i > 7)
+            {
+                string excaptionMessage = String.Format($"Exception in DoWork - i = {i}");
+                Console.WriteLine(excaptionMessage);
+                throw new Exception(excaptionMessage);
+            }
 
             return;
         }

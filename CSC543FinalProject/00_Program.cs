@@ -45,7 +45,7 @@ namespace CSC543FinalProject
             ParallelForMatrixMultiply.Run();
             ParallelForPiCalculation.Run();
             ParallelMapReduce.Run();
-            //ParallelMapReduce_MemoryT.Run();
+            ParallelMapReduce_MemoryT.Run();
 
             return;
         }
@@ -60,6 +60,30 @@ namespace CSC543FinalProject
             var sw = Stopwatch.StartNew();
             method();
             Console.WriteLine($"{label,-40:s1} - Duration: {sw.Elapsed}");
+        }
+
+        //[Conditional("DEBUG")]
+        public static void HaltIfDebug()
+        {
+            if (System.Diagnostics.Debugger.IsAttached)
+            {
+                Console.WriteLine();
+
+                ConsoleColor foreColor = Console.ForegroundColor;
+                ConsoleColor backColor = Console.BackgroundColor;
+
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.BackgroundColor = ConsoleColor.Yellow;
+
+                Console.Write("Press Enter to continue... ");
+
+                Console.ForegroundColor = foreColor;
+                Console.BackgroundColor = backColor;
+
+                Console.ReadLine();
+            }
+
+            return;
         }
     }
 }

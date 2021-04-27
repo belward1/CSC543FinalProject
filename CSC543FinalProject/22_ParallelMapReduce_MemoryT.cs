@@ -31,7 +31,8 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallelMapReduce_MemoryT_Tasks ===================================== \n");
+            Console.WriteLine("\n\n" + ("ParallelForEach - MapReduce (Memory<T>)" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
 
             Dictionary<string, int> wordStoreDict = new Dictionary<string, int>();
             ConcurrentDictionary<string, int> wordStore = new ConcurrentDictionary<string, int>();
@@ -107,7 +108,7 @@ namespace CSC543FinalProject
             //Thread.Sleep(5 * 1000);
             GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
-            Console.WriteLine("\nParallel For: \n");
+            Console.WriteLine("\nParallel ForEach: \n");
             wordStore.Clear();
             stopwatch.Reset();
             stopwatch.Start();
@@ -247,7 +248,7 @@ namespace CSC543FinalProject
             // Collect elapsed time and report
             stopWatch.Stop();
             double textCreateTimeSecs = (double)stopWatch.ElapsedMilliseconds / 1000.0;
-            Console.WriteLine($"Text create time: {textCreateTimeSecs} (secs)");
+            Console.WriteLine($"\nText create time: {textCreateTimeSecs} (secs)");
 
             /*
              * Quick converasion factors:

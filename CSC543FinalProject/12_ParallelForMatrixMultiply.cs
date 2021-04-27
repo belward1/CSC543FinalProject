@@ -22,7 +22,8 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallelForMatrixMultiply ===================================== \n");
+            Console.WriteLine("\n\n" + ("ParallelFor/Foreach - MatrixMultiply" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
 
             // Generate two random matrices and a third to hold the product
             const int aRows = 1_000;

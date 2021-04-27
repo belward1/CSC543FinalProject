@@ -23,7 +23,8 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallelForDotProduct ===================================== \n");
+            Console.WriteLine("\n\n" + ("ParallelFor/Foreach - DotProduct" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
 
             // Generate two random vectors
             const int VECTOR_SIZE = 100_000_000;

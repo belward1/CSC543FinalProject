@@ -27,8 +27,10 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\n" + ("ParallelForPiCalculation " + new string('=', 100)).Substring(0, 100) + "\n");
-            Console.WriteLine($"Pi Refernce value from c#'s Math.PI const                - Pi = {Math.PI,19:f16}");
+            Console.WriteLine("\n\n" + ("ParallelFor/Foreach - PiCalculation" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
+
+            Console.WriteLine($"\nPi Refernce value from c#'s Math.PI const                - Pi = {Math.PI,19:f16}");
             Console.WriteLine("From: https://en.wikipedia.org/wiki/Pi                   - Pi =  3.1415926535897932384626433");
 
             // Generate two random matrices and a third to hold the product
@@ -166,6 +168,10 @@ namespace CSC543FinalProject
 
             //******************************
 
+            Program.HaltIfDebug();
+
+            //******************************
+
             //Thread.Sleep(5 * 1000);
             GC.Collect();
             Console.WriteLine("\nSequential For (Nilakantha Infinite Series): \n");
@@ -286,8 +292,7 @@ namespace CSC543FinalProject
 
             //******************************
 
-            Console.WriteLine("\n\nPress Enter to continue...");
-            Console.ReadLine();
+            Program.HaltIfDebug();
 
             //******************************
 

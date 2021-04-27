@@ -25,7 +25,9 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallellInvoke =============================================== \n");
+            Console.WriteLine("\n\n" + ("ParallellInvoke" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
+
             Stopwatch stopwatch = new Stopwatch();
             Stopwatch stopwatchT = new Stopwatch();
 
@@ -63,6 +65,12 @@ namespace CSC543FinalProject
 
             stopwatchT.Stop();
             Console.WriteLine($"\nTotal Duration: {stopwatchT.Elapsed}");
+
+            //******************************
+
+            Program.HaltIfDebug();
+
+            //******************************
 
             try
             {
@@ -158,7 +166,7 @@ namespace CSC543FinalProject
         /// <returns></returns>
         static string[] CreateWordArray(string uri, int multiplier)
         {
-            Console.WriteLine($"Retrieving from {uri}");
+            Console.WriteLine($"\nRetrieving from {uri}");
 
             // Download a web page the easy way.
             string page = new WebClient().DownloadString(uri);

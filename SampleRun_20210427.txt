@@ -1,0 +1,318 @@
+CSC543 Final Project - Spring 2021 - Bob Elward
+OS: Microsoft Windows NT 10.0.19042.0
+Computer Name: DESKTOP
+
+
+ParallellInvoke ===================================================================================================
+
+Press Enter to continue...
+
+Retrieving from http://www.gutenberg.org/files/54700/54700-0.txt
+
+Total words: 33,167,500
+
+Sequential:
+
+Begin first...
+Task 1 -- The most common words are:
+  Oblomov
+  himself
+  Schtoltz
+  Gutenberg
+  Project
+  another
+  thought
+  Oblomov's
+  nothing
+  replied
+
+Duration: 00:00:00.9575015
+Begin second...
+Task 2 -- The word "sleep" occurs 28500 times.
+Duration: 00:00:02.5244028
+Begin third...
+Task 3 -- The longest word is incomprehensible.
+Duration: 00:00:00.4790872
+
+Total Duration: 00:00:03.9623632
+
+Press Enter to continue...
+
+Parallel Invoke:
+
+Begin third task...
+Begin second task...
+Begin first task...
+Task 3 -- The longest word is incomprehensible.
+Task 1 -- The most common words are:
+  Oblomov
+  himself
+  Schtoltz
+  Gutenberg
+  Project
+  another
+  thought
+  Oblomov's
+  nothing
+  replied
+
+Task 2 -- The word "sleep" occurs 28500 times.
+Duration: 00:00:03.0638526
+
+
+ParallellFor - Simple =============================================================================================
+
+Press Enter to continue...
+
+Sequential For:
+
+i = 0 on thread: 1
+i = 1 on thread: 1
+i = 2 on thread: 1
+i = 3 on thread: 1
+i = 4 on thread: 1
+i = 5 on thread: 1
+i = 6 on thread: 1
+i = 7 on thread: 1
+i = 8 on thread: 1
+i = 9 on thread: 1
+
+Parallel For:
+
+i = 2 on thread: 9
+i = 0 on thread: 1
+i = 1 on thread: 4
+i = 3 on thread: 6
+i = 4 on thread: 10
+i = 5 on thread: 11
+i = 6 on thread: 13
+i = 7 on thread: 12
+i = 8 on thread: 14
+i = 9 on thread: 9
+
+Parallel For w/ DegreeOfParallelism:
+
+i = 0 on thread: 1
+i = 3 on thread: 9
+i = 6 on thread: 4
+i = 1 on thread: 1
+i = 4 on thread: 4
+i = 7 on thread: 14
+i = 5 on thread: 4
+i = 8 on thread: 14
+i = 2 on thread: 1
+i = 9 on thread: 1
+
+Parallel For - Anonymous Method:
+
+i = 7 on thread: 15
+i = 0 on thread: 1
+i = 1 on thread: 9
+i = 8 on thread: 14
+i = 2 on thread: 10
+i = 3 on thread: 12
+i = 4 on thread: 6
+i = 5 on thread: 13
+i = 9 on thread: 16
+i = 6 on thread: 11
+
+Parallel For - Delegate Method:
+
+i = 0 on thread: 1
+i = 1 on thread: 9
+i = 2 on thread: 14
+i = 3 on thread: 15
+i = 4 on thread: 10
+i = 5 on thread: 6
+i = 6 on thread: 16
+i = 7 on thread: 13
+i = 8 on thread: 12
+i = 9 on thread: 4
+Exception in DoWork - i = 8
+Exception in DoWork - i = 9
+ERROR-AggregateException: One or more errors occurred. (Exception in DoWork - i = 8) (Exception in DoWork - i = 9)
+
+
+ParalellForEach - With ThreadLocal ================================================================================
+
+Press Enter to continue...
+
+array: 9, 3, 6, 4, 1, 8, 2, 7, 10, 5
+
+Parallel ForEach:
+
+Thread: 4, n=9, LocalSum=9
+Thread: 16, n=7, LocalSum=7
+Thread: 6, n=1, LocalSum=1
+Thread: 9, n=4, LocalSum=4
+Thread: 15, n=8, LocalSum=8
+Thread: 1, n=6, LocalSum=6
+Thread: 12, n=3, LocalSum=3
+Thread: 10, n=5, LocalSum=5
+Thread: 11, n=2, LocalSum=2
+Thread: 13, n=10, LocalSum=10
+
+Sum = 55
+
+
+ParallelForEach - SimulatedWork ===================================================================================
+
+Press Enter to continue...
+
+Sequential For:
+
+Duration: 00:00:15.4295733
+
+Parallel ForEach (Defaults):
+
+Duration: 00:00:01.9782061
+
+Parallel ForEach (maxParallelism = 8):
+
+Duration: 00:00:01.9373529
+
+Parallel ForEach (minThreads: 100):
+
+Duration: 00:00:00.3316019
+
+
+ParallelFor/Foreach - DotProduct ==================================================================================
+
+Press Enter to continue...
+
+Sequential For:
+
+Duration: 00:00:00.3169378 - Result:           24998603.3
+
+Parallel For:
+
+Duration: 00:00:00.2435823 - Result:           24998603.3
+
+Parallel ForEach w/ Range Partitioner:
+
+Duration: 00:00:00.1595532 - Result:           24998603.3
+
+
+ParallelFor/Foreach - MatrixMultiply ==============================================================================
+
+Press Enter to continue...
+
+Sequential For:
+
+Duration: 00:00:13.4027123
+
+Parallel For:
+
+Duration: 00:00:03.6177987
+
+
+ParallelFor/Foreach - PiCalculation ===============================================================================
+
+Press Enter to continue...
+
+Pi Refernce value from c#'s Math.PI const                - Pi =  3.1415926535897931
+From: https://en.wikipedia.org/wiki/Pi                   - Pi =  3.1415926535897932384626433
+
+Sequential For (Leibniz Infinite Series):
+
+Duration: 00:00:07.6817461 - Iterations:   2,000,000,000 - Pi =  3.1415926530880767
+
+Parallel For (Leibniz Infinite Series):
+
+Duration: 00:00:03.8689204 - Iterations:   2,000,000,000 - Pi =  3.1415926530902913
+
+Parallel ForEach - Toggle (Leibniz Infinite Series):
+
+Duration: 00:00:02.5974643 - Iterations:   2,000,000,000 - Pi =  3.1415926530897966
+
+Parallel ForEach - Odd/Even (Leibniz Infinite Series):
+
+Duration: 00:00:02.1285984 - Iterations:   2,000,000,000 - Pi =  3.1415926530897971
+
+Press Enter to continue...
+
+Sequential For (Nilakantha Infinite Series):
+
+Duration: 00:00:09.3686914 - Iterations:   2,000,000,000 - Pi =  3.1415926535897869
+
+Parallel For (Nilakantha Infinite Series):
+
+Duration: 00:00:04.8869953 - Iterations:   2,000,000,000 - Pi =  3.1415926535897913
+
+Parallel ForEach - Toggle (Nilakantha Infinite Series):
+
+Duration: 00:00:03.1182977 - Iterations:   2,000,000,000 - Pi =  3.1415926535897913
+
+Parallel ForEach - Odd/Even (Nilakantha Infinite Series):
+
+Duration: 00:00:02.7793261 - Iterations:   2,000,000,000 - Pi =  3.1415926535897913
+
+Press Enter to continue...
+
+Sequential For (Ramanujan 1, 1914 formula):
+
+Duration: 00:00:00.0004402 - Iterations:               4 - Pi =  3.1415926535897931
+
+Sequential For (Ramanujan 2, 1914 formula):
+
+Duration: 00:00:00.0000052 - Iterations:               4 - Pi =  3.1415926535897931
+
+Sequential For (Chudonovsky, 1987 formula):
+
+Duration: 00:00:00.0000136 - Iterations:               3 - Pi =  3.1415926535897936
+
+
+ParallelForEach - MapReduce =======================================================================================
+
+Press Enter to continue...
+
+Text create time: 0.803 (secs)
+File text size: 0.449 (GB) - 481,656,400 (Bytes)
+
+Sequential For:
+
+Duration: 00:00:15.6021594
+
+Number of unique found: 35387 - Total words found: 60,696,000
+Word:           Zviad - occurs the minimum number of times: 200
+Word:             and - occurs the maximum number of times: 1,603,800
+Number of words with minimum number of times: 23172
+Number of words with maximum number of times: 1
+
+Parallel ForEach:
+
+Duration: 00:00:15.8689351
+
+Number of unique found: 35387 - Total words found: 60,696,000
+Word:           Zviad - occurs the minimum number of times: 200
+Word:             and - occurs the maximum number of times: 1,603,800
+Number of words with minimum number of times: 23172
+Number of words with maximum number of times: 1
+
+
+ParallelForEach - MapReduce (Memory<T>) ===========================================================================
+
+Press Enter to continue...
+
+Text create time: 0.383 (secs)
+File text size: 0.449 (GB) - 481,656,200 (Bytes)
+
+Sequential For:
+
+Duration: 00:00:25.0501727
+
+Number of unique found: 35388 - Total words found: 60,695,801
+Word:  SwitzerlandThe - occurs the minimum number of times: 199
+Word:             and - occurs the minimum number of times: 1,603,800
+
+Parallel ForEach:
+
+Duration: 00:00:27.1265278
+
+Number of unique found: 35388 - Total words found: 60,695,801
+Word:  SwitzerlandThe - occurs the minimum number of times: 199
+Word:             and - occurs the minimum number of times: 1,603,800
+
+I:\Users\Bob\SkyDrive\KU_Classes\08_CSC543_2021Spring_Multiprocessing and Concurrent Programming_DaleParson\CSharpCode\CSC543FinalProject\CSC543FinalProject\bin\Debug\net5.0\CSC543FinalProject.exe (process 142516) exited with code 0.
+To automatically close the console when debugging stops, enable Tools->Options->Debugging->Automatically close the console when debugging stops.
+Press any key to close this window . . .

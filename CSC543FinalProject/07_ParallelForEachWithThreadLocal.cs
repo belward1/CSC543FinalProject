@@ -21,8 +21,13 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParalellForEachWithThreadLocal ============================== \n");
+            Console.WriteLine("\n\n" + ("ParalellForEach - With ThreadLocal" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
+
             int[] array = { 9, 3, 6, 4, 1, 8, 2, 7, 10, 5 };
+            Console.Write("\narray: ");
+            for (int i = 0; i < array.Length; i++) { Console.Write((i != 0 ? ", " : "") + array[i]); }
+            Console.WriteLine();
             int finalSum = 0;
 
             //******************************

@@ -28,7 +28,8 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallelForEach_SimulatedWork ============================== \n");
+            Console.WriteLine("\n\n" + ("ParallelForEach - SimulatedWork" + " " + new string('=', 115)).Substring(0, 115));
+            Program.HaltIfDebug();
 
             Stopwatch stopwatch = new Stopwatch();
             IEnumerable<int> range = Enumerable.Range(0, 1000);
