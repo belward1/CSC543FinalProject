@@ -23,35 +23,29 @@ namespace CSC543FinalProject
         {
             Console.WriteLine("\n\nParalellForEachWithThreadLocal ============================== \n");
             int[] array = { 9, 3, 6, 4, 1, 8, 2, 7, 10, 5 };
-            int sum = 0;
-            try
-            {
-                //******************************
+            int finalSum = 0;
 
-                Console.WriteLine("\nParallel ForEach: \n");
-                Parallel.ForEach<int, int>(array                                             // input array
-                                         , () =>                                             // initialize the ThreadLocal variable
-                                         { 
-                                             return 0; 
-                                         }
-                                         , (n, loopState, localSum) =>                       // body delegate
-                                         {
-                                             // Sum each element passed to this task
-                                             localSum += n;
-                                             Console.WriteLine($"Thread: {Thread.CurrentThread.ManagedThreadId}, n={n}, LocalSum={localSum}");
-                                             return localSum;
-                                         }
-                                         , (localSum) =>                                     // thread aggregator
-                                         {
-                                             Interlocked.Add(ref sum, localSum);
-                                         }
-                                          );
-                Console.WriteLine($"\nSum = {sum}");
-            }
-            catch(AggregateException aggEx)
-            {
-                Console.WriteLine($"ERROR-AggregateException: {aggEx}");
-            }
+            //******************************
+
+            Console.WriteLine("\nParallel ForEach: \n");
+            Parallel.ForEach<int, int>(array                                                // input array
+                                        , () =>                                             // initialize the ThreadLocal variable
+                                        { 
+                                            return 0; 
+                                        }
+                                        , (n, loopState, localSum) =>                       // body delegate
+                                        {
+                                            // Sum each element passed to this task
+                                            localSum += n;
+                                            Console.WriteLine($"Thread: {Thread.CurrentThread.ManagedThreadId}, n={n}, LocalSum={localSum}");
+                                            return localSum;
+                                        }
+                                        , (localSum) =>                                     // finalize (aggregator)
+                                        {
+                                            Interlocked.Add(ref finalSum, localSum);
+                                        }
+                                        );
+            Console.WriteLine($"\nSum = {finalSum}");
 
             //******************************
 

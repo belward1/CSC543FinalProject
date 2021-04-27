@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Threading;
+using System.Runtime;
 using System.Threading.Tasks;
 
 namespace CSC543FinalProject
@@ -35,7 +35,8 @@ namespace CSC543FinalProject
 
             //******************************
 
-            Thread.Sleep(5 * 1000);
+            //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nSequential For: \n");
             stopwatch.Reset();
@@ -50,34 +51,36 @@ namespace CSC543FinalProject
 
             //******************************
 
-            Thread.Sleep(5 * 1000);
+            //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nParallel For: \n");
             stopwatch.Reset();
             stopwatch.Start();
             sum = 0.0;
-            Parallel.For(0                                           // from inclusive
-                        , VECTOR_SIZE                                // to exclusive
-                        , () =>                                      // initialize the thread local state
-                        {
-                            return 0.0;
-                        }
-                        , (i, loopState, localSum) =>                // body delegate
-                        {
-                            localSum += a[i] * b[i];               
-                            return localSum;                       
-                        }                                            
-                        , (partialSum) =>                            // finalize: aggregate
-                        {
-                            lock (lockObj) sum += partialSum;
-                        }
-                         );
+            Parallel.For(0                                          // from inclusive
+                       , VECTOR_SIZE                                // to exclusive
+                       , () =>                                      // initialize the thread local state
+                         {
+                             return 0.0;
+                         }
+                       , (i, loopState, localSum) =>                // body delegate
+                         {
+                             localSum += a[i] * b[i];               
+                             return localSum;                       
+                         }                                            
+                       , (partialSum) =>                            // finalize: aggregate
+                         {
+                             lock (lockObj) sum += partialSum;
+                         }
+                        );
             stopwatch.Stop();
             Console.WriteLine($"Duration: {stopwatch.Elapsed} - Result: {sum,20:f1}");
 
             //******************************
 
-            Thread.Sleep(5 * 1000);
+            //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nParallel ForEach w/ Range Partitioner: \n");
             stopwatch.Reset();
@@ -85,21 +88,21 @@ namespace CSC543FinalProject
             sum = 0.0;
             Parallel.ForEach(Partitioner.Create(0, VECTOR_SIZE)                // range partitioner
                            , () =>                                             // initialize the ThreadLocal variable
-                           {
-                               return 0.0;
-                           }
+                             {
+                                 return 0.0;
+                             }
                            , (range, state, localSum) =>                       // body delegate
-                           {
-                               for (int i = range.Item1; i < range.Item2; i++)
-                               {
-                                   localSum += a[i] * b[i];
-                               }
-                               return localSum;
-                           }
+                             {
+                                 for (int i = range.Item1; i < range.Item2; i++)
+                                 {
+                                     localSum += a[i] * b[i];
+                                 }
+                                 return localSum;
+                             }
                            , (partialSum) =>                                   // thread aggregator
-                           {
-                               lock (lockObj) sum += partialSum;
-                           }
+                             {
+                                 lock (lockObj) sum += partialSum;
+                             }
                             );
             stopwatch.Stop();
             Console.WriteLine($"Duration: {stopwatch.Elapsed} - Result: {sum,20:f1}");

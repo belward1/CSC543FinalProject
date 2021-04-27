@@ -44,6 +44,7 @@ namespace CSC543FinalProject
 
             foreach (int i in range)
             {
+                // Workload that requires 1 ms to complete
                 Thread.Sleep(1);
             }
 
@@ -61,6 +62,7 @@ namespace CSC543FinalProject
             Parallel.ForEach<int>(partitioner
                                 , i =>
                                 {
+                                    // Workload that requires 1 ms to complete
                                     Thread.Sleep(1);
                                 }
                                  );
@@ -83,6 +85,7 @@ namespace CSC543FinalProject
                                 , parallelOptions
                                 , i =>
                                 {
+                                    // Workload that requires 1 ms to complete
                                     Thread.Sleep(1);
                                 }
                                  );
@@ -104,6 +107,7 @@ namespace CSC543FinalProject
             Parallel.ForEach<int>(partitioner
                                 , i =>
                                 {
+                                    // Workload that requires 1 ms to complete
                                     Thread.Sleep(1);
                                 }
                                  );

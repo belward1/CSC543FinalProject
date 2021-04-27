@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -29,9 +30,10 @@ namespace CSC543FinalProject
          */
         public static void Run()
         {
-            Console.WriteLine("\n\nParallelMapReduce_Tasks ===================================== \n");
+            Console.WriteLine("\n\n" + ("ParallelMapReduce_Tasks " + new string('=', 100)).Substring(0,100) + "\n");
 
             Dictionary<string, int> wordStoreDict = new Dictionary<string, int>();
+            
             ConcurrentDictionary<string, int> wordStore = new ConcurrentDictionary<string, int>();
             ParallelOptions parallelOptions = new ParallelOptions() { MaxDegreeOfParallelism = -1 }; // Set to -1 for .NET to determine
             int totalWords;
@@ -48,6 +50,7 @@ namespace CSC543FinalProject
             //******************************
 
             //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nSequential For: \n");
             wordStore.Clear();
@@ -96,11 +99,14 @@ namespace CSC543FinalProject
             minKvp = wordStoreDict.OrderBy(kvp => kvp.Key).Aggregate((l_kvp, r_kvp) => l_kvp.Value < r_kvp.Value ? l_kvp : r_kvp);
             maxKvp = wordStoreDict.OrderBy(kvp => kvp.Key).Aggregate((l_kvp, r_kvp) => l_kvp.Value > r_kvp.Value ? l_kvp : r_kvp);
             Console.WriteLine($"Word: {minKvp.Key,15:s1} - occurs the minimum number of times: {minKvp.Value,1:#,###,###,###,##0}");
-            Console.WriteLine($"Word: {maxKvp.Key,15:s1} - occurs the minimum number of times: {maxKvp.Value,1:#,###,###,###,##0}");
+            Console.WriteLine($"Word: {maxKvp.Key,15:s1} - occurs the maximum number of times: {maxKvp.Value,1:#,###,###,###,##0}");
+            Console.WriteLine($"Number of words with minimum number of times: {wordStoreDict.Where(kvp => kvp.Value == minKvp.Value).Count()}");
+            Console.WriteLine($"Number of words with maximum number of times: {wordStoreDict.Where(kvp => kvp.Value == maxKvp.Value).Count()}");
 
             //******************************
 
             //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nParallel For: \n");
             wordStore.Clear();
@@ -108,11 +114,11 @@ namespace CSC543FinalProject
             stopwatch.Start();
 
             // Map the words
-            Parallel.ForEach<string, List<string>>(ProduceWordBlocks(fileText)                               // input enumerator
+            Parallel.ForEach<string, ConcurrentBag<string>>(ProduceWordBlocks(fileText)                      // input enumerator
                                                  , parallelOptions                                           // parallel options - MaxDegreeOfparallelism 
                                                  , () =>                                                     // initialize the ThreadLocal variable
                                                  {
-                                                     return new List<string>();
+                                                     return new ConcurrentBag<string>();
                                                  }
                                                  , (wordBlock, loopState, wordsList) =>                      // body delegate
                                                  {   
@@ -162,7 +168,9 @@ namespace CSC543FinalProject
             minKvp = wordStore.OrderBy(kvp => kvp.Key).Aggregate((l_kvp, r_kvp) => l_kvp.Value < r_kvp.Value ? l_kvp : r_kvp);
             maxKvp = wordStore.OrderBy(kvp => kvp.Key).Aggregate((l_kvp, r_kvp) => l_kvp.Value > r_kvp.Value ? l_kvp : r_kvp);
             Console.WriteLine($"Word: {minKvp.Key,15:s1} - occurs the minimum number of times: {minKvp.Value,1:#,###,###,###,##0}");
-            Console.WriteLine($"Word: {maxKvp.Key,15:s1} - occurs the minimum number of times: {maxKvp.Value,1:#,###,###,###,##0}");
+            Console.WriteLine($"Word: {maxKvp.Key,15:s1} - occurs the maximum number of times: {maxKvp.Value,1:#,###,###,###,##0}");
+            Console.WriteLine($"Number of words with minimum number of times: {wordStore.Where(kvp => kvp.Value == minKvp.Value).Count()}");
+            Console.WriteLine($"Number of words with maximum number of times: {wordStore.Where(kvp => kvp.Value == maxKvp.Value).Count()}");
 
             //******************************
 
@@ -230,11 +238,11 @@ namespace CSC543FinalProject
             stopWatch = Stopwatch.StartNew();
 
             // Make multiple copies of this file to increase the size
-            int capacity = fileText.Length * multiplier;
-            StringBuilder sbFileText = new StringBuilder(fileText, capacity);
+            int capacity = fileText.Length * multiplier + multiplier;
+            StringBuilder sbFileText = new StringBuilder(fileText + " ", capacity);
             for (int i = 1; i < multiplier; i++)
             {
-                sbFileText.Append(fileText);
+                sbFileText.Append(fileText + " ");
             }
 
             // Collect elapsed time and report

@@ -64,7 +64,20 @@ namespace CSC543FinalProject
 
                 //******************************
 
-                Console.WriteLine("\nParallel For - Seperate Method: \n");
+                Console.WriteLine("\nParallel For - Anonymous Method: \n");
+                Parallel.For(0                           // from inclusive
+                           , loopMax                     // to exclusive
+                           , delegate(int i)             // body delegate
+                           {
+                               Console.WriteLine($"i = {i} on thread: {Thread.CurrentThread.ManagedThreadId}");
+                               Thread.Sleep(1000);
+                           }
+                            );
+
+
+                //******************************
+
+                Console.WriteLine("\nParallel For - Delegate Method: \n");
                 Parallel.For(0                           // from inclusive
                            , loopMax                     // to exclusive
                            , DoWork                      // body delegate

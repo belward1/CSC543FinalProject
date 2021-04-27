@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,7 @@ namespace CSC543FinalProject
             Memory<char> fileText = GetFileText(multiplier);
 
             //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nSequential For: \n");
             wordStore.Clear();
@@ -103,6 +105,7 @@ namespace CSC543FinalProject
             Console.WriteLine($"Word: {maxKvp.Key,15:s1} - occurs the minimum number of times: {maxKvp.Value,1:#,###,###,###,##0}");
 
             //Thread.Sleep(5 * 1000);
+            GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
             GC.Collect();
             Console.WriteLine("\nParallel For: \n");
             wordStore.Clear();
