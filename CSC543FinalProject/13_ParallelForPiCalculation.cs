@@ -33,9 +33,7 @@ namespace CSC543FinalProject
 
             // Generate two random matrices and a third to hold the product
             const long maxSteps = 2_000_000_000;
-            long incr;
             double pi;
-            double sign;
             long iter;
             double result;
             double prior;
@@ -52,8 +50,10 @@ namespace CSC543FinalProject
             stopwatch.Reset();
             stopwatch.Start();
             pi = 0.0;
-            incr = 2;
             //// Toggle sign - step by 2
+            //long incr;
+            //incr = 2;
+            //double sign;
             //sign = 1.0;
             //for (long i = 0; i < (maxSteps * incr); i += incr)
             //{
@@ -172,8 +172,8 @@ namespace CSC543FinalProject
             stopwatch.Reset();
             stopwatch.Start();
             pi = 3.0;
-            incr = 2;
             //// Toggle sign - step by 2
+            //incr = 2;
             //sign = 1.0;
             //for (long i = 0; i < (maxSteps * incr); i += incr)
             //{
