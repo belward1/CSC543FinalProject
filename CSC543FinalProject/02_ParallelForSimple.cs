@@ -79,7 +79,7 @@ namespace CSC543FinalProject
 
                 //******************************
 
-                Console.WriteLine("\nParallel For - Delegate Method: \n");
+                Console.WriteLine("\nParallel For - Named Delegate Method: \n");
                 Parallel.For(0                           // from inclusive
                            , loopMax                     // to exclusive
                            , DoWork                      // body delegate

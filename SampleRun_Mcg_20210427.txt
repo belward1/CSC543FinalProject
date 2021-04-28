@@ -1,0 +1,319 @@
+Using username "relwa136".
+Pre-authentication banner message from server:
+|       ___           ___                                   ___          _____
+|      /  /\         /  /\        ___           ___        /  /\        /  /::\
+|     /  /:/        /  /:/_      /  /\         /  /\      /  /::\      /  /:/\:\
+|    /  /:/        /  /:/ /\    /  /:/        /  /:/     /  /:/\:\    /  /:/  \:\
+|   /  /:/  ___   /  /:/ /::\  /__/::\       /  /:/     /  /:/~/:/   /__/:/ \__\:|
+|  /__/:/  /  /\ /__/:/ /:/\:\ \__\/\:\__   /  /::\    /__/:/ /:/___ \  \:\ /> /:/
+|  \  \:\ /  /:/ \  \:\/:/~/:/    \  \:\/\ /__/:/\:\   \  \:\/:::::/  \  \:\  /:/
+|   \  \:\  /:/   \  \::/ /:/      \__\::/ \__\/  \:\   \  \::/~~~~    \  \:\/:/
+|    \  \:\/:/     \__\/ /:/       /__/:/       \  \:\   \  \:\         \  \::/
+|     \  \::/        /__/:/        \__\/         \__\/    \  \:\         \__\/
+|      \__\/         \__\/                                 \__\/
+End of banner message from server
+Authenticating with public key "relwa136@live.kutztown.edu"
+Last failed login: Wed Apr 14 11:07:00 EDT 2021 from 24.115.94.190.res-cmts.ovr.ptd.net on ssh:notty
+There were 2 failed login attempts since the last successful login.
+Last login: Wed Mar 24 17:59:01 2021 from 24.115.94.190.res-cmts.ovr.ptd.net
+[relwa136@kuvapcsitrd01 ~]$ mcg
+relwa136@mcgonagall's password:
+Last failed login: Mon Apr 26 23:25:56 EDT 2021 from kuvapcsitrd01.kutztown.edu on ssh:notty
+There was 1 failed login attempt since the last successful login.
+Last login: Fri Apr 23 11:59:11 2021 from kupapcsit01.kutztown.edu
+[relwa136@kupapcsit01 ~]$ cd csc543
+[relwa136@kupapcsit01 csc543]$ cd csharp
+[relwa136@kupapcsit01 csharp]$ cd CSC543FinalProject
+[relwa136@kupapcsit01 CSC543FinalProject]$ make run
+dotnet run ./CSC543FinalProject.csproj
+CSC543 Final Project - Spring 2021 - Bob Elward
+OS: Unix 3.10.0.1160
+Computer Name: kupapcsit01
+
+
+ParallellInvoke ===================================================================================================
+
+Retrieving from http://www.gutenberg.org/files/54700/54700-0.txt
+
+Total words: 33,167,500
+
+Sequential:
+
+Begin first...
+Task 1 -- The most common words are:
+  Oblomov
+  himself
+  Schtoltz
+  Gutenberg
+  Project
+  another
+  thought
+  Oblomov’s
+  nothing
+  replied
+
+Duration: 00:00:01.4777265
+Begin second...
+Task 2 -- The word "sleep" occurs 28500 times.
+Duration: 00:00:03.2835523
+Begin third...
+Task 3 -- The longest word is incomprehensible.
+Duration: 00:00:00.6779300
+
+Total Duration: 00:00:05.4393641
+
+Parallel Invoke:
+
+Begin first task...
+Begin second task...
+Begin third task...
+Task 3 -- The longest word is incomprehensible.
+Task 1 -- The most common words are:
+  Oblomov
+  himself
+  Schtoltz
+  Gutenberg
+  Project
+  another
+  thought
+  Oblomov’s
+  nothing
+  replied
+
+Task 2 -- The word "sleep" occurs 28500 times.
+Duration: 00:00:03.6913756
+
+
+ParallellFor - Simple =============================================================================================
+
+Sequential For:
+
+i = 0 on thread: 1
+i = 1 on thread: 1
+i = 2 on thread: 1
+i = 3 on thread: 1
+i = 4 on thread: 1
+i = 5 on thread: 1
+i = 6 on thread: 1
+i = 7 on thread: 1
+i = 8 on thread: 1
+i = 9 on thread: 1
+
+Parallel For:
+
+i = 4 on thread: 10
+i = 2 on thread: 4
+i = 0 on thread: 1
+i = 3 on thread: 9
+i = 1 on thread: 7
+i = 5 on thread: 11
+i = 6 on thread: 12
+i = 7 on thread: 8
+i = 8 on thread: 13
+i = 9 on thread: 14
+
+Parallel For w/ DegreeOfParallelism:
+
+i = 0 on thread: 1
+i = 3 on thread: 14
+i = 6 on thread: 13
+i = 1 on thread: 1
+i = 4 on thread: 13
+i = 7 on thread: 7
+i = 2 on thread: 1
+i = 5 on thread: 13
+i = 8 on thread: 7
+i = 9 on thread: 1
+
+Parallel For - Anonymous Method:
+
+i = 0 on thread: 1
+i = 1 on thread: 14
+i = 2 on thread: 7
+i = 8 on thread: 16
+i = 6 on thread: 9
+i = 7 on thread: 10
+i = 3 on thread: 13
+i = 4 on thread: 11
+i = 5 on thread: 8
+i = 9 on thread: 4
+
+Parallel For - Delegate Method:
+
+i = 0 on thread: 1
+i = 1 on thread: 9
+i = 2 on thread: 36
+i = 6 on thread: 34
+i = 3 on thread: 35
+i = 4 on thread: 25
+i = 5 on thread: 10
+i = 7 on thread: 17
+i = 9 on thread: 23
+i = 8 on thread: 27
+Exception in DoWork - i = 9
+Exception in DoWork - i = 8
+ERROR-AggregateException: One or more errors occurred. (Exception in DoWork - i = 8) (Exception in DoWork - i = 9)
+
+
+ParalellForEach - With ThreadLocal ================================================================================
+
+array: 9, 3, 6, 4, 1, 8, 2, 7, 10, 5
+
+Parallel ForEach:
+
+Thread: 1, n=9, LocalSum=9
+Thread: 27, n=3, LocalSum=3
+Thread: 23, n=6, LocalSum=6
+Thread: 36, n=8, LocalSum=8
+Thread: 35, n=7, LocalSum=7
+Thread: 9, n=5, LocalSum=5
+Thread: 17, n=4, LocalSum=4
+Thread: 10, n=1, LocalSum=1
+Thread: 25, n=2, LocalSum=2
+Thread: 34, n=10, LocalSum=10
+
+Sum = 55
+
+
+ParallelForEach - SimulatedWork ===================================================================================
+
+Sequential For:
+
+Duration: 00:00:01.1065259
+
+Parallel ForEach (Defaults):
+
+Duration: 00:00:00.0549529
+
+Parallel ForEach (maxParallelism = 32):
+
+Duration: 00:00:00.0407350
+
+Parallel ForEach (minThreads: 100):
+
+Duration: 00:00:00.0191932
+
+
+ParallelFor/Foreach - DotProduct ==================================================================================
+
+Sequential For:
+
+Duration: 00:00:00.3342076 - Result:           24996884.4
+
+Parallel For:
+
+Duration: 00:00:00.1742460 - Result:           24996884.4
+
+Parallel ForEach w/ Range Partitioner:
+
+Duration: 00:00:00.0714663 - Result:           24996884.4
+
+
+ParallelFor/Foreach - MatrixMultiply ==============================================================================
+
+Sequential For:
+
+Duration: 00:00:12.5340143
+
+Parallel For:
+
+Duration: 00:00:01.1408306
+
+
+ParallelFor/Foreach - PiCalculation ===============================================================================
+
+Pi Refernce value from c#'s Math.PI const                - Pi =  3.1415926535897931
+From: https://en.wikipedia.org/wiki/Pi                   - Pi =  3.1415926535897932384626433
+
+Sequential For (Leibniz Infinite Series):
+
+Duration: 00:00:08.7518819 - Iterations:   2,000,000,000 - Pi =  3.1415926530880767
+
+Parallel For (Leibniz Infinite Series):
+
+Duration: 00:00:01.7619381 - Iterations:   2,000,000,000 - Pi =  3.1415926530895151
+
+Parallel ForEach - Toggle (Leibniz Infinite Series):
+
+Duration: 00:00:00.9046921 - Iterations:   2,000,000,000 - Pi =  3.1415926530897811
+
+Parallel ForEach - Odd/Even (Leibniz Infinite Series):
+
+Duration: 00:00:00.7803902 - Iterations:   2,000,000,000 - Pi =  3.1415926530897811
+
+Sequential For (Nilakantha Infinite Series):
+
+Duration: 00:00:10.4889682 - Iterations:   2,000,000,000 - Pi =  3.1415926535897869
+
+Parallel For (Nilakantha Infinite Series):
+
+Duration: 00:00:01.9631926 - Iterations:   2,000,000,000 - Pi =  3.1415926535897918
+
+Parallel ForEach - Toggle (Nilakantha Infinite Series):
+
+Duration: 00:00:01.0612220 - Iterations:   2,000,000,000 - Pi =  3.1415926535897913
+
+Parallel ForEach - Odd/Even (Nilakantha Infinite Series):
+
+Duration: 00:00:01.0004399 - Iterations:   2,000,000,000 - Pi =  3.1415926535897913
+
+Sequential For (Ramanujan 1, 1914 formula):
+
+Duration: 00:00:00.0006302 - Iterations:               4 - Pi =  3.1415926535897931
+
+Sequential For (Ramanujan 2, 1914 formula):
+
+Duration: 00:00:00.0000148 - Iterations:               4 - Pi =  3.1415926535897931
+
+Sequential For (Chudonovsky, 1987 formula):
+
+Duration: 00:00:00.0000213 - Iterations:               3 - Pi =  3.1415926535897936
+
+
+ParallelForEach - MapReduce =======================================================================================
+
+Text create time: 0.742 (secs)
+File text size: 0.449 (GB) - 481,656,400 (Bytes)
+
+Sequential For:
+
+Duration: 00:00:18.0517741
+
+Number of unique found: 35387 - Total words found: 60,696,000
+Word:           Zviad - occurs the minimum number of times: 200
+Word:             and - occurs the maximum number of times: 1,603,800
+Number of words with minimum number of times: 23172
+Number of words with maximum number of times: 1
+
+Parallel ForEach:
+
+Duration: 00:00:20.3489144
+
+Number of unique found: 35387 - Total words found: 60,696,000
+Word:           Zviad - occurs the minimum number of times: 200
+Word:             and - occurs the maximum number of times: 1,603,800
+Number of words with minimum number of times: 23172
+Number of words with maximum number of times: 1
+
+
+ParallelForEach - MapReduce (Memory<T>) ===========================================================================
+
+Text create time: 0.303 (secs)
+File text size: 0.449 (GB) - 481,656,200 (Bytes)
+
+Sequential For:
+
+Duration: 00:00:29.1676088
+
+Number of unique found: 35388 - Total words found: 60,695,801
+Word:  SwitzerlandThe - occurs the minimum number of times: 199
+Word:             and - occurs the minimum number of times: 1,603,800
+
+Parallel ForEach:
+
+Duration: 00:01:03.7531639
+
+Number of unique found: 35388 - Total words found: 60,695,801
+Word:  SwitzerlandThe - occurs the minimum number of times: 199
+Word:             and - occurs the minimum number of times: 1,603,800
+[relwa136@kupapcsit01 CSC543FinalProject]$

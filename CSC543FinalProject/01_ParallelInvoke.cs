@@ -50,12 +50,14 @@ namespace CSC543FinalProject
             stopwatch.Start();
             GetMostCommonWords(words);
             Console.WriteLine($"Duration: {stopwatch.Elapsed}");
+
             // Second Action
             Console.WriteLine("Begin second...");
             stopwatch.Reset();
             stopwatch.Start();
             GetCountForWord(words, "sleep");
             Console.WriteLine($"Duration: {stopwatch.Elapsed}");
+
             // Third Action
             Console.WriteLine("Begin third...");
             stopwatch.Reset();

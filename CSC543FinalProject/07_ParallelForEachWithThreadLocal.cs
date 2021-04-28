@@ -24,7 +24,7 @@ namespace CSC543FinalProject
             Console.WriteLine("\n\n" + ("ParalellForEach - With ThreadLocal" + " " + new string('=', 115)).Substring(0, 115));
             Program.HaltIfDebug();
 
-            int[] array = { 9, 3, 6, 4, 1, 8, 2, 7, 10, 5 };
+            int[] array = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
             Console.Write("\narray: ");
             for (int i = 0; i < array.Length; i++) { Console.Write((i != 0 ? ", " : "") + array[i]); }
             Console.WriteLine();
@@ -42,7 +42,7 @@ namespace CSC543FinalProject
                                         {
                                             // Sum each element passed to this task
                                             localSum += n;
-                                            Console.WriteLine($"Thread: {Thread.CurrentThread.ManagedThreadId}, n={n}, LocalSum={localSum}");
+                                            Console.WriteLine($"xThread: {Thread.CurrentThread.ManagedThreadId, 3:##0}, n={n,3:##0}, LocalSum={localSum,3:##0}");
                                             return localSum;
                                         }
                                         , (localSum) =>                                     // finalize (aggregator)
