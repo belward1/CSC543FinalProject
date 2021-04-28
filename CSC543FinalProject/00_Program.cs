@@ -12,7 +12,7 @@ using System.Diagnostics;
  *          This program highlights to Task Parallel Library which is part
  *          of Microsoft's .NET C# language.
  * </summary>
- * <see cref="CSC 543 - Spring 2021 - Final Project - Bob Elward.pptx">PowerPoint presentation</see>
+ * <see cref="https://github.com/belward1/CSC543FinalProject">Github repository</see>
  * <remarks>Written By: Bob Elward - April 2021</remarks>
  */
 namespace CSC543FinalProject

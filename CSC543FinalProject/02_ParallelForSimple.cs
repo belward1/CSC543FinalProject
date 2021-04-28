@@ -112,6 +112,7 @@ namespace CSC543FinalProject
             {
                 string excaptionMessage = String.Format($"Exception in DoWork - i = {i}");
                 Console.WriteLine(excaptionMessage);
+                // This exeption will be aggregated and caught by the parent method
                 throw new Exception(excaptionMessage);
             }
 
