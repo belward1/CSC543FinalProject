@@ -66,8 +66,8 @@ namespace CSC543FinalProject
             // Calculate sign on odd/even iteration
             for (long i = 0; i < maxSteps; i++)
             {
-                pi += (1.0 - (2L * (i & 1L))) 
-                    * (4.0 / (1.0 + 2L * i));
+                pi += (1L - (2L * (i & 1L))) 
+                    * (4.0 / (1L + (2L * i)));
             }
             iter = maxSteps;
             stopwatch.Stop();
@@ -85,8 +85,8 @@ namespace CSC543FinalProject
                                , () => 0.0
                                , (i, loopState, localState) =>
                                {
-                                   localState += (1.0 - (2L * (i & 1L))) 
-                                               * (4.0 / (1.0 + 2L * i));
+                                   localState += (1L - (2L * (i & 1L))) 
+                                               * (4.0 / (1L + (2L * i)));
                                    return localState;
                                }
                                , (localState) =>
@@ -105,21 +105,21 @@ namespace CSC543FinalProject
 
             //Thread.Sleep(5 * 1000);
             GC.Collect();
-            Console.WriteLine("\nParallel ForEach - Toggle (Leibniz Infinite Series): \n");
+            Console.WriteLine("\nParallel ForEach - Toggle ThreadLocal (Leibniz Infinite Series): \n");
             stopwatch.Reset();
             stopwatch.Start();
             pi = 0.0;
             Parallel.ForEach<Tuple<long, long>
-                           , (double pi, double sign)>(Partitioner.Create(0L, maxSteps)
-                                                     , () => (0.0, 0.0)
+                           , (double pi, long sign)>(Partitioner.Create(0L, maxSteps)
+                                                     , () => (0.0, 0)
                                                      , (range, loopState, localState) =>
                                                      {
-                                                         localState.sign = (1.0 - (2L * (range.Item1 & 1L)));
+                                                         localState.sign = (1L - (2L * (range.Item1 & 1L)));
                                                          for (long i = range.Item1; i < range.Item2; i++)
                                                          {
                                                              localState.pi += localState.sign 
-                                                                            * (4.0 / (1.0 + 2L * i));
-                                                             localState.sign *= -1.0;
+                                                                            * (4.0 / (1L + (2L * i)));
+                                                             localState.sign *= -1L;
                                                          }
                                                          return localState;
                                                      }
@@ -128,6 +128,39 @@ namespace CSC543FinalProject
                                                          lock (lockObj)
                                                          {
                                                              pi += localState.pi;
+                                                         };
+                                                     }
+                                                      );
+            iter = maxSteps;
+            stopwatch.Stop();
+            Console.WriteLine($"Duration: {stopwatch.Elapsed} - Iterations: {iter,15:###,###,###,##0} - Pi = {pi,19:f16}");
+
+            //******************************
+
+            //Thread.Sleep(5 * 1000);
+            GC.Collect();
+            Console.WriteLine("\nParallel ForEach - Toggle local variable (Leibniz Infinite Series): \n");
+            stopwatch.Reset();
+            stopwatch.Start();
+            pi = 0.0;
+            Parallel.ForEach<Tuple<long, long>, double>(Partitioner.Create(0L, maxSteps)
+                                                     , () => (0.0)
+                                                     , (range, loopState, localStatePi) =>
+                                                     {
+                                                         long sign = (1L - (2L * (range.Item1 & 1L)));
+                                                         for (long i = range.Item1; i < range.Item2; i++)
+                                                         {
+                                                             localStatePi += sign
+                                                                           * (4.0 / (1L + (2L * i)));
+                                                             sign *= -1L;
+                                                         }
+                                                         return localStatePi;
+                                                     }
+                                                     , (localStatePi) =>
+                                                     {
+                                                         lock (lockObj)
+                                                         {
+                                                             pi += localStatePi;
                                                          };
                                                      }
                                                       );
@@ -149,8 +182,8 @@ namespace CSC543FinalProject
                                                       {
                                                           for (long i = range.Item1; i < range.Item2; i++)
                                                           {
-                                                              localState += (1.0 - (2L * (i & 1L))) 
-                                                                          * (4.0 / (1.0 + 2L * i));
+                                                              localState += (1L - (2L * (i & 1L))) 
+                                                                          * (4.0 / (1L + (2L * i)));
                                                           }
                                                           return localState;
                                                       }
@@ -190,8 +223,16 @@ namespace CSC543FinalProject
             // Calculate sign on odd/even iteration
             for (long i = 0; i < maxSteps; i ++)
             {
-                pi += (1.0 - (2L * (i & 1L))) 
-                    * (4.0 / ((2L * i + 2.0) * (2L * i + 3.0) * (2L * i + 4.0)));
+                pi += (1L - (2L * (i & 1L)))
+                    * (4.0 / (((2L * i) + 2.0) * ((2L * i) + 3.0) * ((2L * i) + 4.0)));
+                //
+                // Note: to use BigInteger takes 3+ addittional minutes !!!
+                //
+                    //* (4.0 / (double)( (new BigInteger( ((2L * i) + 2L) ) )
+                    //                 * (new BigInteger( ((2L * i) + 3L) ) )
+                    //                 * (new BigInteger( ((2L * i) + 4L) ) )
+                    //                 )
+                    //  );
             }
             iter = maxSteps;
             stopwatch.Stop();
@@ -209,7 +250,7 @@ namespace CSC543FinalProject
                                , () => 0.0
                                , (i, loopState, localState) =>
                                {
-                                   localState += (1.0 - (2L * (i & 1L))) 
+                                   localState += (1L - (2L * (i & 1L))) 
                                                * (4.0 / ((2L * i + 2.0) * (2L * i + 3.0) * (2L * i + 4.0)));
                                    return localState;
                                }
@@ -229,21 +270,21 @@ namespace CSC543FinalProject
 
             //Thread.Sleep(5 * 1000);
             GC.Collect();
-            Console.WriteLine("\nParallel ForEach - Toggle (Nilakantha Infinite Series): \n");
+            Console.WriteLine("\nParallel ForEach - Toggle ThreadLocal (Nilakantha Infinite Series): \n");
             stopwatch.Reset();
             stopwatch.Start();
             pi = 3.0;
             Parallel.ForEach<Tuple<long, long>
-                           , (double pi, double sign)>(Partitioner.Create(0L, maxSteps)
-                               , () => (0.0, 0.0)
+                           , (double pi, long sign)>(Partitioner.Create(0L, maxSteps)
+                               , () => (0.0, 0)
                                , (range, loopState, localState) =>
                                {
-                                   localState.sign = (1.0 - (2L * (range.Item1 & 1L)));
+                                   localState.sign = (1L - (2L * (range.Item1 & 1L)));
                                    for (long i = range.Item1; i < range.Item2; i++)
                                    {
-                                       localState.pi += localState.sign 
+                                       localState.pi += localState.sign
                                                       * (4.0 / ((2L * i + 2.0) * (2L * i + 3.0) * (2L * i + 4.0)));
-                                       localState.sign *= -1.0;
+                                       localState.sign *= -1L;
                                    }
                                    return localState;
                                }
@@ -252,6 +293,39 @@ namespace CSC543FinalProject
                                    lock (lockObj)
                                    {
                                        pi += localState.pi;
+                                   };
+                               }
+                                );
+            iter = maxSteps;
+            stopwatch.Stop();
+            Console.WriteLine($"Duration: {stopwatch.Elapsed} - Iterations: {iter,15:###,###,###,##0} - Pi = {pi,19:f16}");
+
+            //******************************
+
+            //Thread.Sleep(5 * 1000);
+            GC.Collect();
+            Console.WriteLine("\nParallel ForEach - Toggle local variable (Nilakantha Infinite Series): \n");
+            stopwatch.Reset();
+            stopwatch.Start();
+            pi = 3.0;
+            Parallel.ForEach<Tuple<long, long>, double>(Partitioner.Create(0L, maxSteps)
+                               , () => (0.0)
+                               , (range, loopState, localStatePi) =>
+                               {
+                                   long sign = (1L - (2L * (range.Item1 & 1L)));
+                                   for (long i = range.Item1; i < range.Item2; i++)
+                                   {
+                                       localStatePi += sign
+                                                     * (4.0 / ((2L * i + 2.0) * (2L * i + 3.0) * (2L * i + 4.0)));
+                                       sign *= -1L;
+                                   }
+                                   return localStatePi;
+                               }
+                               , (localStatePi) =>
+                               {
+                                   lock (lockObj)
+                                   {
+                                       pi += localStatePi;
                                    };
                                }
                                 );
@@ -273,7 +347,7 @@ namespace CSC543FinalProject
                                                       {
                                                           for (long i = range.Item1; i < range.Item2; i++)
                                                           {
-                                                              localState += (1.0 - (2L * (i & 1L))) 
+                                                              localState += (1L - (2L * (i & 1L))) 
                                                                           * (4.0 / ((2L * i + 2.0) * (2L * i + 3.0) * (2L * i + 4.0)));
                                                           }
                                                           return localState;
